@@ -1,6 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using MultiMarketing.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+
+
+
+builder.Configuration.AddJsonFile("appsettings.json");
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<MarketingDBContext>(options=>options.UseSqlServer(connection));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -9,9 +21,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-builder.Configuration.AddEnvironmentVariables("appsettings.json");
-
-var connection = builder.Configuration.GetConnectionString("DefaulConnection");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,6 +1,6 @@
 ﻿namespace MultiMarketing.Context.Domain
 {
-    public class PlayerRegister
+    public class UserRegister
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
