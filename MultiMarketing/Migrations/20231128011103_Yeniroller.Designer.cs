@@ -12,8 +12,8 @@ using MultiMarketing.Context;
 namespace MultiMarketing.Migrations
 {
     [DbContext(typeof(MarketingDBContext))]
-    [Migration("20231123161012_Intial")]
-    partial class Intial
+    [Migration("20231128011103_Yeniroller")]
+    partial class Yeniroller
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,33 +31,64 @@ namespace MultiMarketing.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<double>("Balance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("BonusBalance")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Registers");
+                });
+
+            modelBuilder.Entity("MultiMarketing.Context.Domain.UserRoles", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rollers");
+                });
+
+            modelBuilder.Entity("MultiMarketing.Context.Domain.UserRoles", b =>
+                {
+                    b.HasOne("MultiMarketing.Context.Domain.UserRegister", "Customer")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

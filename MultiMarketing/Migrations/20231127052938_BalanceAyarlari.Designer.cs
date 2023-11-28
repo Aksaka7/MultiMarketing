@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiMarketing.Context;
 
@@ -11,9 +12,11 @@ using MultiMarketing.Context;
 namespace MultiMarketing.Migrations
 {
     [DbContext(typeof(MarketingDBContext))]
-    partial class MarketingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231127052938_BalanceAyarlari")]
+    partial class BalanceAyarlari
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,34 +61,6 @@ namespace MultiMarketing.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Registers");
-                });
-
-            modelBuilder.Entity("MultiMarketing.Context.Domain.UserRoles", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Rollers");
-                });
-
-            modelBuilder.Entity("MultiMarketing.Context.Domain.UserRoles", b =>
-                {
-                    b.HasOne("MultiMarketing.Context.Domain.UserRegister", "Customer")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

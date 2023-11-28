@@ -1,8 +1,8 @@
-﻿namespace MultiMarketing.Context.Domain
+﻿namespace MultiMarketing.Model.CustomerInfo
 {
-    public class UserRegister
+    public class CustomerInfoModel
     {
-        public Guid Id { get; set; }
+        //Modelden gelecek olan bilgileri DB e yollayacagız. 
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? Username { get; set; }
@@ -12,14 +12,6 @@
         public DateTime? DateTime { get; set; }
         public double Balance { get; set; }
         public double BonusBalance { get; set; }
-       
 
-        
     }
-
-
 }
-
-    
-
-
